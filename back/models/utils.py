@@ -11,9 +11,7 @@ def size(net):
         pp += nn
     return pp
 
-def gen_trimap(segmentation_mask):
-    k_size = 7
-    iterations = 6
+def gen_trimap(segmentation_mask, k_size = 7, iterations = 6):
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (k_size, k_size))
     dilated = cv2.dilate(segmentation_mask, kernel, iterations=iterations)
     eroded = cv2.erode(segmentation_mask, kernel, iterations=iterations)

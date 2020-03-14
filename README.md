@@ -86,9 +86,7 @@ python demo.py \
 图片中的人像分割问题相对更成熟，我们这里简单的用pretrained 的 unet完成这个目标。生成后进行一定的膨胀腐蚀即可生成trimap。核心代码如下。
 
 ```python
-def gen_trimap(segmentation_mask):
-    k_size = 7
-    iterations = 6
+def gen_trimap(segmentation_mask, k_size = 7, iterations = 6):
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (k_size, k_size))
     dilated = cv2.dilate(segmentation_mask, kernel, iterations=iterations)
     eroded = cv2.erode(segmentation_mask, kernel, iterations=iterations)
