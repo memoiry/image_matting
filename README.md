@@ -86,7 +86,9 @@ python demo.py \
 图片中的人像分割问题相对更成熟，我这里简单的用pretrained 的 unet完成这个目标。生成后进行一定的膨胀腐蚀即可生成trimap。核心代码如下。
 
 ```python
-def gen_trimap(segmentation_mask, k_size = 7, iterations = 6):
+def gen_trimap(segmentation_mask):
+    k_size = 7
+    iterations = 6
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (k_size, k_size))
     dilated = cv2.dilate(segmentation_mask, kernel, iterations=iterations)
     eroded = cv2.erode(segmentation_mask, kernel, iterations=iterations)
@@ -152,6 +154,7 @@ def gen_trimap(segmentation_mask, k_size = 7, iterations = 6):
 - 模型：
     - Image matting模型使用了SOTA的开源模型，没有进行改动，如果能结合具体的任务与其他论文的一些技巧进行修改，应该会达到更好的效果。
     - Trimap生成使用了一个图像分割模型，这里使用的比较简单的UNet，我们可以采用更高级的分割模型如deep-lab，这也有很大的进步空间。
+    - 显然这里的Trimap生成用的UNet可以与Image matting的模型进行部分的模型共享，从而减少计算量，实现端对端的Inference，此外两个任务融合也可能可以加强两者共同的效果。
 - 假设：这里假设了原图就是前景$F$，这方面的工作应该也有较大的优化空间。
 - 上线：由于使用了两个模型，一般视频流需要30FPS，所以对模型有一定的优化需求，不过由于这两个模型都是全卷积的，配合GPU，TensorRT，DALI，float16应该有非常大的优化空间。（录制的视频是在我本地的i7 CPU上跑的）
 
