@@ -1,4 +1,4 @@
-# Image Matting 调研报告
+# Image Matting 调研与简单 Demo
 
 ![-w1169](media/15840709208808/123.png)
 
