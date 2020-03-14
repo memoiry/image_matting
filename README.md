@@ -134,7 +134,7 @@ def gen_trimap(segmentation_mask):
 
 最后只需要按照公式$I_{i}=\alpha_{i} F_{i}+\left(1-\alpha_{i}\right) B_{i}, \quad \alpha_{i} \in[0,1]$和背景图进行拼接即可。
 
-![-w1169](media/15840709208808/15841200494426.jpg)
+![-w1169](media/15840709208808/23.png)
 这样整个工作就完成了。
 
 ### 演示
