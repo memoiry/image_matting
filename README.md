@@ -83,7 +83,7 @@ python demo.py \
 
 ### 生成trimap
 
-图片中的人像分割问题相对更成熟，我们这里简单的用pretrained 的 unet完成这个目标。生成后进行一定的膨胀腐蚀即可生成trimap。核心代码如下。
+图片中的人像分割问题相对更成熟，我这里简单的用pretrained 的 unet完成这个目标。生成后进行一定的膨胀腐蚀即可生成trimap。核心代码如下。
 
 ```python
 def gen_trimap(segmentation_mask, k_size = 7, iterations = 6):
